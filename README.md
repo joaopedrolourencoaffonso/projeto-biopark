@@ -66,3 +66,34 @@ Para iniciar o sistema, basta utilizar:
 python3 app.py
 ```
 Uma vez iniciada, acesso o par endereço porta que você salvou (ex: "http://localhost:5000/"). Se você estiver utilizando HTTPS, mas não estiver usando a porta padrão, não esqueça de adicionar o ```https://``` no início do endereço, já que seu browser **não** vai identificar automaticamente.
+
+Uma vez acessada a página, se você estiver usando um certificado auto-assinado, é provável que veja a seguinte tela:
+
+<p align="center"><a href="https://github.com/joaopedrolourencoaffonso/projeto-biopark/blob/main/imagens-README/problema-cert-auto-assinado.png?raw=true"><img src="https://github.com/joaopedrolourencoaffonso/projeto-biopark/blob/main/imagens-README/problema-cert-auto-assinado.png?raw=true" width="540" height="250"></a></p>
+
+Isso acontece pois um certificado _auto-assinado_ não vai estar na lista de certificados confiáveis do seu browser, basta clicar em "Avançado" e seguir para a página.
+
+A primeira página que você vai ver é a página de login:
+
+<p align="center"><a href="https://github.com/joaopedrolourencoaffonso/projeto-biopark/blob/main/imagens-README/login-page.png?raw=true"><img src="https://github.com/joaopedrolourencoaffonso/projeto-biopark/blob/main/imagens-README/login-page.png?raw=true" width="540" height="250"></a></p>
+
+Se você executou o insert da seção "[Base de Dados](https://github.com/joaopedrolourencoaffonso/projeto-biopark#base-de-dados)", basta clicar em "submit" e você será transferido para a tela "boa vindas" ou _welcome_:
+
+<p align="center"><a href="https://github.com/joaopedrolourencoaffonso/projeto-biopark/blob/main/imagens-README/welcome.png?raw=true"><img src="https://github.com/joaopedrolourencoaffonso/projeto-biopark/blob/main/imagens-README/welcome.png?raw=true" width="540" height="250"></a></p>
+
+Clicando no botão da esquerda, você acessará a tela de cadastro:
+
+<p align="center"><a href="https://github.com/joaopedrolourencoaffonso/projeto-biopark/blob/main/imagens-README/cadastrar.png?raw=true"><img src="https://github.com/joaopedrolourencoaffonso/projeto-biopark/blob/main/imagens-README/cadastrar.png?raw=true" width="540" height="250"></a></p>
+
+Clicando no botão da direita, você acessará a tela para pesquisa. Basta escolher um campo desejado e escrever um termo procurado (ex: selecionar a opção "vago" vai retornar todos os apartamentos vagos). Não selecionar nada retornará uma tabela com **todos** os apartamentos:
+
+<p align="center"><a href="https://github.com/joaopedrolourencoaffonso/projeto-biopark/blob/main/imagens-README/pesquisar.png?raw=true"><img src="https://github.com/joaopedrolourencoaffonso/projeto-biopark/blob/main/imagens-README/pesquisar.png?raw=true" width="540" height="250"></a></p>
+
+<p align="center"><a href="https://github.com/joaopedrolourencoaffonso/projeto-biopark/blob/main/imagens-README/pesquisar-apartamentos-vagos.png?raw=true"><img src="https://github.com/joaopedrolourencoaffonso/projeto-biopark/blob/main/imagens-README/pesquisar-apartamentos-vagos.png?raw=true" width="540" height="250"></a></p>
+
+Se você deseja atualizar quaisquer informação sobre um determinado apartamento, incluindo se está **alugado ou não**, basta clicar em "Atualizar" e você será transferido para a página abaixo:
+
+<p align="center"><a href="https://github.com/joaopedrolourencoaffonso/projeto-biopark/blob/main/imagens-README/atualizar.png?raw=true"><img src="https://github.com/joaopedrolourencoaffonso/projeto-biopark/blob/main/imagens-README/atualizar.png?raw=true" width="540" height="250"></a></p>
+
+Atualize os campos conforme necessidade e clique em salvar.
+
