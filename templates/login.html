@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sistema de Registro Biopark</title>
+        <link rel="stylesheet" href="{{ url_for('static',filename='main.css') }}">
+    </head>
+    <body>
+        <h2>Biopark</h2>
+        
+        <div class="caixa">
+	<form action="/login" method="post">
+	  <label for="nome"> Nome:</label><br>
+	  <input type="text" id="nome" name="nome" value="joao"><br>
+	  <label for="senha">Senha:</label><br>
+	  <input type="text" id="senha" name="senha" value="senha"><br><br>
+	  <input type="submit" value="Submit">
+	</form>
+ 
+    </body>
+</html>

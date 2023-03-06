@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sistema de Registro Biopark</title>
+        <link rel="stylesheet" href="{{ url_for('static',filename='main.css') }}">
+    </head>
+    <body>
+        <h2>HTML Forms</h2>
+	
+	<div class="caixa">
+	<div class="form">
+	<p>Pesquisar apartamentos</p>
+	
+	<p>Nome do edificio: </p>
+	<textarea type="text" id="edificio" rows="1" cols="50" placeholder="Edifício Exemplar Uno"></textarea>
+	
+	<p>Nome do Apartamento: </p>
+	<textarea type="text" id="apartamento" rows="1" cols="50" placeholder="Apt. 123"></textarea>
+	
+	<p>Nome do Locatario: </p>
+	<textarea type="text" id="locatario" rows="1" cols="50" placeholder="Rodrigo Silva"></textarea>
+	
+	<p>Endereco: </p>
+	<textarea type="text" id="endereco" rows="1" cols="50" placeholder="Rua dos Exemplares"></textarea>
+	Pesquisar
+	<p>Vagos: </p>
+	<select name="vago" id="vago">
+	  <option value="0">Escolha</option>
+	  <option value="1">Ocupado</option>
+	  <option value="2">Vago</option>
+	</select>
+	
+	<br>
+	<button class="button" onclick="Pesquisar()">Pesquisar</button>
+	</div>
+	</div>
+	
+	<!--RESULTADOS DA PESQUISA-->
+	<div class="caixa">
+	<table id="tabelaElementos">
+
+	</table>
+	<div class="form">
+	
+	</div>
+	</div>
+	
+	<div class="caixa">
+	<p><a href="/welcome">Voltar para pagina principal</a></p>
+	</div>
+	</div>
+	
+	<script>
+	function PopularTabela(json) {
+	  var table = document.getElementById("tabelaElementos");
+	  
+	  table.innerHTML = "";
+
+	  var header = table.createTHead();
+	  var row = header.insertRow();
+	  var list = ['Endereço','Edificio','Apartamento','Locatario','Preço'];
+	  for (var key in list) {
+	    var th = document.createElement("th");
+	    var text = document.createTextNode(list[key]);
+	    th.appendChild(text);
+	    row.appendChild(th);
+	  }
+
+	  for (var i = 0; i < json.length; i++) {
+	    row = table.insertRow();
+	    for (var key in json[i].slice(0,5)) {
+	      var cell = row.insertCell();
+	      var text = document.createTextNode(json[i][key]);
+	      cell.appendChild(text);
+	    }
+
+	    var linkCell = row.insertCell();
+	    var link = document.createElement("a");
+	    link.href = 'atualizar/' + json[i][5];
+	    link.innerText = "Atualizar";
+	    linkCell.appendChild(link);
+	  }
+	}
+	
+	async function Pesquisar() {
+	    var edificio = document.getElementById("edificio").value;
+	    var apartamento = document.getElementById("apartamento").value;
+	    var locatario = document.getElementById("locatario").value;
+	    var endereco = document.getElementById("endereco").value;
+	    var vago = document.getElementById("vago").value;
+	    
+	    const response = await fetch('/busca/{"edificio":"' +  edificio + '","apartamento":"' + apartamento + '","locatario":"' + locatario + '","vago":"' + vago + '","endereco":"' + endereco + '"}');
+	    let data = await response.json();
+	    
+	    console.log(data);
+	    
+	    document.getElementById("tabelaElementos").innerHTML = "";
+	    
+	    if (data == '0') {
+	        data = "Erro, nao foram encontrados resultados compativeis."
+	        document.getElementById("tabelaElementos").innerHTML += data;
+	    } else {
+	        PopularTabela(data);
+	    };
+	}
+	</script>
+    </body>
+</html>

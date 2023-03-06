@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sistema de Registro Biopark</title>
+        <link rel="stylesheet" href="{{ url_for('static',filename='main.css') }}">
+    </head>
+    <body>
+        <h2>HTML Forms</h2>
+
+	<p>Bem vindo!</p>
+	
+	<div class="caixa">
+	<div class="form">
+	<h2>Atualizar Apartamentos</h2>
+
+	<p>Nome do apartamento: </p>
+	<textarea type="text" id="apartamento" rows="1" cols="50">{{ nome_apartamento }}</textarea>
+	<p>Nome do Edifico: </p>
+	<textarea type="text" id="edificio" rows="1" cols="50">{{ nome_edificio }}</textarea>
+	<p>Preço: </p>
+	<textarea type="text" id="preco" rows="1" cols="50">{{ preco }}</textarea>
+	<p>Nome do Locatario: </p>
+	<textarea type="text" id="locatario" rows="1" cols="50">{{ nome_locatario }}</textarea>
+	
+	<br><br>
+	<button class="button" onclick="AtualizarApartamento()">Atualizar</button>
+	<br>
+	<button class="button button-delete" onclick="DeletarApartamento()">Deletar</button>
+	</div>
+	</div>
+	
+	<div class="caixa">
+	<div class="form">
+	<p><a href="/welcome">Voltar para pagina principal</a></p>
+	</div>
+	</div>
+	
+	<script>
+	async function AtualizarApartamento() {
+	    var apartamento = document.getElementById("apartamento").value;
+	    var edificio = document.getElementById("edificio").value;
+	    var preco = document.getElementById("preco").value;
+	    var locatario = document.getElementById("locatario").value;
+	    
+	    if (locatario == " " || locatario == "") {
+	        locatario = "vago";
+	    }
+	    
+	    if (apartamento == " " || apartamento == "" || edificio == "" || edificio == " " || preco == "" || preco == " ") {
+	        alert("Erro de cadastro, so o campo 'locatario' nao precisa estar preenchido.");
+	        return "erro";
+	    }
+	    
+	    const response = await fetch('/atualizar_db/{"option":"0","id":"{{ ID }}","apartamento":"' +  apartamento + '","edificio":"' + edificio + '","preco":"' + preco + '","locatario":"' + locatario + '"}');
+	    const data = await response.json();
+	    console.log(data);
+	    const result = data["result"];
+	    
+	    if (result == 1) {
+	        alert("Atualizaçao realizada com sucesso!");
+	    } else if (result == 3) {
+	        alert("Erro, edificio nao existe!");
+	    } else {
+	        alert("Erro, tente novamente mais tarde!");
+	    }
+	}
+	
+	async function DeletarApartamento() {
+	    let escolha = confirm("Tem certeza?");
+	    
+	    if (!escolha) {
+	        return "cancelado"
+	    } else {
+	        const response = await fetch('/atualizar_db/{"option":"1","id":"{{ ID }}"}');
+	    }
+	}
+	</script>
+ 
+    </body>
+</html>

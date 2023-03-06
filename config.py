@@ -1,0 +1,12 @@
+#host="localhost"
+mysql_host="192.168.1.19"
+mysql_port=3306
+mysql_user="sistema_remoto"
+mysql_password="senha"
+database="biopark"
+my_host="0.0.0.0"
+my_port=5000
+#chave_privada=False
+#certificado=False
+chave_privada='sistema.pem'
+certificado='sistema_crt.pem'

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sistema de Registro Biopark</title>
+        <link rel="stylesheet" href="{{ url_for('static',filename='main.css') }}">
+    </head>
+    <body>
+        <!--CADASTRANDO EDIFICIO-->
+        <div class="caixa">
+        <div class="form">
+        <h2>Cadastrar Edifícios</h2>
+        
+        <p>Nome do Edificio: </p>
+	<textarea type="text" id="edificio-nome" rows="1" cols="50" placeholder="Edifício Exemplar Uno"></textarea><br>
+	<p>Endereço:</p>
+	<textarea type="text" id="edificio-endereco" rows="1" cols="50" placeholder="Avenida Exemplar Segunda"></textarea>
+	
+	<br>
+	<button class="button" onclick="CadastrarEdificio()">Cadastrar</button>
+
+	</div>
+	</div>
+
+	<br>
+	
+	<div class="caixa">
+	<div class="form">
+	<h2>Cadastrar Apartamentos</h2>
+
+	<p>Nome do apartamento: </p>
+	<textarea type="text" id="apartamento" rows="1" cols="50" placeholder="Apt. 123"></textarea>
+	<p>Nome do Edifico: </p>
+	<textarea type="text" id="edificio" rows="1" cols="50" placeholder="Edifício Exemplar Uno"></textarea>
+	<p>Preço: </p>
+	<textarea type="text" id="preco" rows="1" cols="50" placeholder="500"></textarea>
+	<p>Nome do Locatario: </p>
+	<textarea type="text" id="locatario" rows="1" cols="50" placeholder="Rodrigo Silva"></textarea>
+	
+	
+	<br>
+	<button class="button" onclick="CadastrarApartamento()">Cadastrar</button>
+	</div>
+	</div>
+
+    <!--CADASTRANDO APARTAMENTOS-->	
+	<div class="caixa">
+	<div class="form">
+	<p><a href="/welcome">Voltar para pagina principal</a></p>
+	</div>
+	</div>
+	
+	<script>
+	async function CadastrarApartamento() {
+	    var apartamento = document.getElementById("apartamento").value;
+	    var edificio = document.getElementById("edificio").value;
+	    var preco = document.getElementById("preco").value;
+	    var locatario = document.getElementById("locatario").value;
+	    
+	    if (locatario == " " || locatario == "") {
+	        locatario = "vago";
+	    }
+	    
+	    if (apartamento == " " || apartamento == "" || edificio == "" || edificio == " " || preco == "" || preco == " ") {
+	        alert("Erro de cadastro, so o campo 'locatario' nao precisa estar preenchido.");
+	        return "erro";
+	    }
+	    
+	    const response = await fetch('/apartamento_cadastro/{"apartamento":"' +  apartamento + '","edificio":"' + edificio + '","preco":"' + preco + '","locatario":"' + locatario + '"}');
+	    const data = await response.json();
+	    console.log(data);
+	    const result = data["result"];
+	    
+	    if (result == 1) {
+	        alert("Cadastro realizado com sucesso!");
+	    } else if (result == 3) {
+	        alert("Erro de cadastro, edificio nao existe!");
+	    } else {
+	        alert("Erro de cadastro, tente novamente mais tarde!");
+	    }
+	}
+	
+	async function CadastrarEdificio() {
+	    var edificio_nome = document.getElementById("edificio-nome").value;
+	    var edificio_endereco = document.getElementById("edificio-endereco").value;
+	    
+	    if (edificio_endereco == " " || edificio_endereco == "" || edificio_nome == " " || edificio_nome == "") {
+	        alert("Erro de cadastro, campos nao podem ser deixados vazios");
+	        return "erro";
+	    } 
+	    
+	    const response = await fetch('/edificio_cadastro/{"edificio_nome":"' +  edificio_nome + '","edificio_endereco":"' + edificio_endereco + '"}');
+	    const data = await response.json();
+	    console.log(data);
+	    const result = data["result"];
+	    
+	    if (result == 1) {
+	        alert("Cadastro realizado com sucesso!");
+	    } else if (result == 4) {
+	        alert("Erro de cadastro, ja existe um edificio com esse nome!");
+	    } else {
+	        alert("Erro de cadastro, tente novamente mais tarde!");
+	    }
+	}
+	</script>
+	</div>
+	</div>
+ 
+    </body>
+</html>
